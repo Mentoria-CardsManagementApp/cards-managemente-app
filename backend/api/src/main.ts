@@ -1,11 +1,9 @@
 import express from 'express';
-import { logHello } from './loger';
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 const app = express();
-logHello();
 app.get('/', (req, res) => {
   res.send({ message: 'Hello API' });
 });
