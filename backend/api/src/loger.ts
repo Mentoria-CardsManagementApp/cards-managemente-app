@@ -1,4 +1,4 @@
 function logHello() {
-  console.log('Hello' as any);
+  console.log('Hello2' as any);
 }
 export { logHello };
