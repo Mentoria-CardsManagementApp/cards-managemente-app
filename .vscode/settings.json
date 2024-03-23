@@ -1,0 +1,9 @@
+{
+  "typescript.preferences.importModuleSpecifier": "project-relative",
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    ".*Styles.*",
+  ]
+}
