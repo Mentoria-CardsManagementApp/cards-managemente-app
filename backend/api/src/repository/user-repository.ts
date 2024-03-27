@@ -1,9 +1,9 @@
+import { NewUser, User, UserUpdate } from '../database/entities/user';
 import { db } from '../database/postgres-dialect';
-import { User, NewUser, UserUpdate } from '../utils/kysely-types';
 
 export async function findUserById(id: string): Promise<User> {
   return await db
-    .selectFrom('users')
+    .selectFrom('user')
     .where('id', '=', id)
     .selectAll()
     .executeTakeFirst();
@@ -11,7 +11,7 @@ export async function findUserById(id: string): Promise<User> {
 
 export async function createUser(user: NewUser): Promise<User> {
   return await db
-    .insertInto('users')
+    .insertInto('user')
     .values(user)
     .returningAll()
     .executeTakeFirst();
@@ -19,7 +19,7 @@ export async function createUser(user: NewUser): Promise<User> {
 
 export async function updateUser(id: string, updateWith: UserUpdate) {
   return await db
-    .updateTable('users')
+    .updateTable('user')
     .set(updateWith)
     .where('id', '=', id)
     .execute();
@@ -27,7 +27,7 @@ export async function updateUser(id: string, updateWith: UserUpdate) {
 
 export async function deleteUser(id: string): Promise<User> {
   return await db
-    .deleteFrom('users')
+    .deleteFrom('user')
     .where('id', '=', id)
     .returningAll()
     .executeTakeFirst();

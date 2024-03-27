@@ -1,4 +1,4 @@
-import { DB } from '../utils/kysely-types';
+import { DB } from './kysely-types';
 import { Pool } from 'pg';
 import { Kysely, PostgresDialect } from 'kysely';
 
