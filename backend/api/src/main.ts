@@ -9,19 +9,16 @@ const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 const app = express();
 app.use(limiter);
 
-const allowedOrigins = ['localhost:3005'];
+const allowedOrigins = ['http://localhost:3005', 'http://localhost:4002'];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin
-      // (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.indexOf(origin) === -1) {
         const msg =
-          'The CORS policy for this site does not ' +
-          'allow access from the specified Origin.';
+          'The CORS policy for this site does not allow access from the specified Origin.';
         return callback(new Error(msg), false);
       }
 
