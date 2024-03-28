@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky install",
-    "migrate:run": "npx nx build api && node dist/backend/api/backend/api/src/database/scripts/index.js",
+    "migrate:run": "npx nx build api && node dist/backend/api/backend/api/src/database/scripts/migrations-runner.js",
     "migrate:rollback": "npx nx build api && node dist/backend/api/backend/api/src/database/scripts/rollback.js"
   },
   "private": true,

@@ -23,21 +23,25 @@ export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable('user_magic_card')
     .addColumn('user_id', 'uuid', (col) => col.references('user.id').notNull())
-    .addColumn('magic_card_id', 'uuid', (col) => col.primaryKey().notNull())
+    .addColumn('magic_card_id', 'uuid', (col) => col.notNull())
     .addColumn('quatity', 'integer', (col) => col.notNull())
     .addColumn('conservation_state', 'varchar', (col) => col.notNull())
+    .addPrimaryKeyConstraint('primary_key', ['user_id', 'magic_card_id'])
     .execute();
 
   await db.schema
     .createTable('user_configs')
     .addColumn('magic_collection_privacy', 'varchar', (col) => col.notNull())
-    .addColumn('user_id', 'uuid', (col) => col.references('user.id').notNull())
+    .addColumn('user_id', 'uuid', (col) =>
+      col.references('user.id').notNull().unique()
+    )
     .execute();
 
   await db.schema
     .createTable('user_auth_provider')
     .addColumn('user_id', 'uuid', (col) => col.references('user.id').notNull())
-    .addColumn('auth_provider', 'varchar', (col) => col.primaryKey().notNull())
+    .addColumn('auth_provider', 'varchar', (col) => col.notNull())
+    .addPrimaryKeyConstraint('primary_key', ['user_id', 'auth_provider'])
     .execute();
 }
 
