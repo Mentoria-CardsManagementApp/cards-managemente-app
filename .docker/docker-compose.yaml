@@ -5,13 +5,15 @@ services:
     image: postgres
     restart: always
     environment:
+      POSTGRES_DB: cards
+      POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-    ports: 
+    ports:
       - "5432:5432"
 
 
   redis:
     image: redis
     restart: always
-    ports: 
+    ports:
       - "6379:6379"
