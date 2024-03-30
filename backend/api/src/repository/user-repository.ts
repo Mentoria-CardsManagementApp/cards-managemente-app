@@ -1,8 +1,13 @@
+import { UpdateResult } from 'kysely';
 import { NewUser, User, UserUpdate } from '../database/entities/user';
 import { db } from '../database/postgres-dialect';
 
-export async function findUserById(id: string): Promise<undefined | string> {
-  return undefined;
+export async function findUserById(id: string): Promise<User | undefined> {
+  return await db
+    .selectFrom('user')
+    .where('id', '=', id)
+    .selectAll()
+    .executeTakeFirst();
 }
 
 export async function createUser(user: NewUser): Promise<User> {
@@ -10,15 +15,18 @@ export async function createUser(user: NewUser): Promise<User> {
     .insertInto('user')
     .values(user)
     .returningAll()
-    .executeTakeFirst();
+    .executeTakeFirstOrThrow();
 }
 
-export async function updateUser(id: string, updateWith: UserUpdate) {
+export async function updateUser(
+  id: string,
+  updateWith: UserUpdate
+): Promise<UpdateResult> {
   return await db
     .updateTable('user')
     .set(updateWith)
     .where('id', '=', id)
-    .execute();
+    .executeTakeFirstOrThrow();
 }
 
 export async function deleteUser(id: string): Promise<User> {
@@ -26,5 +34,5 @@ export async function deleteUser(id: string): Promise<User> {
     .deleteFrom('user')
     .where('id', '=', id)
     .returningAll()
-    .executeTakeFirst();
+    .executeTakeFirstOrThrow();
 }
