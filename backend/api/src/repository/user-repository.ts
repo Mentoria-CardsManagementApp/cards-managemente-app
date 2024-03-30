@@ -1,12 +1,8 @@
 import { NewUser, User, UserUpdate } from '../database/entities/user';
 import { db } from '../database/postgres-dialect';
 
-export async function findUserById(id: string): Promise<User> {
-  return await db
-    .selectFrom('user')
-    .where('id', '=', id)
-    .selectAll()
-    .executeTakeFirst();
+export async function findUserById(id: string): Promise<undefined | string> {
+  return undefined;
 }
 
 export async function createUser(user: NewUser): Promise<User> {
