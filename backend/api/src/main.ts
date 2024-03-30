@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 import { limiter } from './middlewares/rateLimiter';
+import errorHandlerGlobal from './middlewares/ErrorHandlerGlobal';
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
@@ -30,6 +31,8 @@ app.use(
 app.get('/', (req, res) => {
   res.send({ message: 'Hello API' });
 });
+
+app.use(errorHandlerGlobal);
 
 app.listen(port, host, () => {
   console.log(`[ ready ] http://${host}:${port}`);
