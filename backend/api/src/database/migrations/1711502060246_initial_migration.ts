@@ -26,7 +26,10 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn('magic_card_id', 'uuid', (col) => col.notNull())
     .addColumn('quatity', 'integer', (col) => col.notNull())
     .addColumn('conservation_state', 'varchar', (col) => col.notNull())
-    .addPrimaryKeyConstraint('primary_key', ['user_id', 'magic_card_id'])
+    .addPrimaryKeyConstraint('user_magic_card_primary_key', [
+      'user_id',
+      'magic_card_id',
+    ])
     .execute();
 
   await db.schema
@@ -41,7 +44,10 @@ export async function up(db: Kysely<any>): Promise<void> {
     .createTable('user_auth_provider')
     .addColumn('user_id', 'uuid', (col) => col.references('user.id').notNull())
     .addColumn('auth_provider', 'varchar', (col) => col.notNull())
-    .addPrimaryKeyConstraint('primary_key', ['user_id', 'auth_provider'])
+    .addPrimaryKeyConstraint('user_auth_provider_primary_key', [
+      'user_id',
+      'auth_provider',
+    ])
     .execute();
 }
 
