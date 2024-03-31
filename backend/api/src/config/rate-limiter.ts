@@ -6,7 +6,7 @@ const hundredRequestsPerMinuteConfig = {
   message: 'You have exceeded the 100 requests in 1 minute limit!',
 };
 
-export const limiter = rateLimit({
+export const rateLimiter = rateLimit({
   ...hundredRequestsPerMinuteConfig,
   standardHeaders: true,
   legacyHeaders: false,

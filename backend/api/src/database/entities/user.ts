@@ -11,7 +11,7 @@ export interface UserTable {
   email: string;
   username: string;
   birthDate: Nullable<Date>;
-  city: Nullable<string>;
+  city?: string | null;
   region: Nullable<string>;
   country: Nullable<string>;
   createdAt: Generated<Date>;
