@@ -8,6 +8,9 @@ import {
 
 export interface UserTable {
   id: string;
+  googleId: string;
+  spotifyId: string;
+  facebookId: string;
   email: string;
   username: string;
   birthDate: Nullable<Date>;
