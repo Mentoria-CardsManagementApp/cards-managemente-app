@@ -21,6 +21,6 @@ export interface UserTable {
   updatedAt: Generated<Date>;
 }
 
-export type User = Selectable<UserTable>;
+export type User = Selectable<UserTable> | undefined;
 export type NewUser = Insertable<UserTable>;
 export type UserUpdate = Updateable<UserTable>;
