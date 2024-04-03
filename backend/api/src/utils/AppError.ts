@@ -33,7 +33,7 @@ export class AppError extends Error {
   }: AppErrorParams) {
     super(message);
     this.statusCode = statusCode;
-    this.isCritical = isCritical;
+    this.isCritical = isCritical ?? false;
     this.tags = tags;
     this.trace = trace;
     Object.setPrototypeOf(this, AppError.prototype);
