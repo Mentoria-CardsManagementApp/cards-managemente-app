@@ -28,46 +28,37 @@ app.use(cors({
 
 app.use(errorHandlerGlobal);
 
+app.get('/', (req, res) => {
+  res.send({ message: 'Hello API' });
+});
+
+const server = app.listen(port, host, () => {
+  console.log(`[ ready ] http://${host}:${port}`);
+});
+
 enum ExitStatus {
   Failure = 1,
   Success = 0
 }
 
 process.on('unhandledRejection', (reason, promise) => {
-  error(
-    `App exiting due to an unhandled promise: ${promise} and reason ${reason}`
-  )
-
+  console.error(`App exiting due to an unhandled promise: ${promise} and reason ${reason}`)
   throw reason
 })
 
 process.on('uncaughtException', (error) => {
-  error(`App exiting due to an uncaught exception: ${error}`)
+  console.error(`App exiting due to an uncaught exception: ${error}`)
   process.exit(ExitStatus.Failure)
 })
-
-try {
-  app.get('/', (req, res) => {
-    res.send({ message: 'Hello API' });
-  });
 
   const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT']
   exitSignals.map((sig) => process.on(sig, async () => {
     try {
-      await server.close();
-      error(`App exited with success`)
+      server.close();
+      console.error(`App exited with success`)
       process.exit(ExitStatus.Success)
     } catch(error) {
-      error(`App exited with error ${error}`)
+      console.error(`App exited with error ${error}`)
       process.exit(ExitStatus.Failure)
     }
   }))
-} catch(error) {
-  //como evidenciar o erro?
-  error(`App exited with error ${error}`)
-  process.exit(ExitStatus.Failure)
-}
-
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
-});
