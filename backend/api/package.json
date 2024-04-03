@@ -10,5 +10,8 @@
     "node": ">=20.0.0"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "nx": {
+    "includedScripts": []
+  }
 }
