@@ -1,10 +1,4 @@
-import {
-  Generated,
-  Insertable,
-  Nullable,
-  Selectable,
-  Updateable,
-} from 'kysely';
+import { Generated, Insertable, Selectable, Updateable } from 'kysely';
 
 export interface UserTable {
   id: string;
@@ -13,10 +7,10 @@ export interface UserTable {
   facebookId: string;
   email: string;
   username: string;
-  birthDate: Nullable<Date>;
-  city: Nullable<string>;
-  region: Nullable<string>;
-  country: Nullable<string>;
+  birthDate: Date | null;
+  city: string | null;
+  region: string | null;
+  country: string | null;
   createdAt: Generated<Date>;
   updatedAt: Generated<Date>;
 }
