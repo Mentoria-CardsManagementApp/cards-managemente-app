@@ -5,100 +5,72 @@ import { UpdateResult } from 'kysely';
 
 export class UserRepository implements UserRepositoryInterface {
   async findUserById(id: string): Promise<User | undefined> {
-    try {
-      const user = await db
-        .selectFrom('user')
-        .where('id', '=', id)
-        .selectAll()
-        .executeTakeFirst();
+    const user = await db
+      .selectFrom('user')
+      .where('id', '=', id)
+      .selectAll()
+      .executeTakeFirst();
 
-      return user;
-    } catch (error: any) {
-      throw new error();
-    }
+    return user;
   }
 
   async findUserByGoogleId(googleId: string): Promise<User | undefined> {
-    try {
-      const user = await db
-        .selectFrom('user')
-        .where('googleId', '=', googleId)
-        .selectAll()
-        .executeTakeFirst();
+    const user = await db
+      .selectFrom('user')
+      .where('googleId', '=', googleId)
+      .selectAll()
+      .executeTakeFirst();
 
-      return user;
-    } catch (error: any) {
-      throw new error();
-    }
+    return user;
   }
 
   async findUserByFacebookId(facebookId: string): Promise<User | undefined> {
-    try {
-      const user = await db
-        .selectFrom('user')
-        .where('facebookId', '=', facebookId)
-        .selectAll()
-        .executeTakeFirst();
+    const user = await db
+      .selectFrom('user')
+      .where('facebookId', '=', facebookId)
+      .selectAll()
+      .executeTakeFirst();
 
-      return user;
-    } catch (error: any) {
-      throw new error();
-    }
+    return user;
   }
 
   async findUserBySpotifyId(spotifyId: string): Promise<User | undefined> {
-    try {
-      const user = await db
-        .selectFrom('user')
-        .where('facebookId', '=', spotifyId)
-        .selectAll()
-        .executeTakeFirst();
+    const user = await db
+      .selectFrom('user')
+      .where('facebookId', '=', spotifyId)
+      .selectAll()
+      .executeTakeFirst();
 
-      return user;
-    } catch (error: any) {
-      throw new error();
-    }
+    return user;
   }
 
   async createUser(user: NewUser): Promise<User> {
-    try {
-      const createdUser = await db
-        .insertInto('user')
-        .values(user)
-        .returningAll()
-        .executeTakeFirstOrThrow();
+    const createdUser = await db
+      .insertInto('user')
+      .values(user)
+      .returningAll()
+      .executeTakeFirstOrThrow();
 
-      return createdUser as User;
-    } catch (error: any) {
-      throw new Error(error);
-    }
+    return createdUser as User;
   }
 
   async updateUser(id: string, updateWith: UserUpdate): Promise<UpdateResult> {
-    try {
-      const user = await db
-        .updateTable('user')
-        .set(updateWith)
-        .where('id', '=', id)
-        .executeTakeFirstOrThrow();
+    const user = await db
+      .updateTable('user')
+      .set(updateWith)
+      .where('id', '=', id)
+      .executeTakeFirstOrThrow();
 
-      return user;
-    } catch (error: any) {
-      throw new Error(error);
-    }
+    return user;
   }
 
   async deleteUser(id: string): Promise<User> {
-    try {
-      const deletedUser = await db
-        .deleteFrom('user')
-        .where('id', '=', id)
-        .returningAll()
-        .executeTakeFirstOrThrow();
+    const deletedUser = await db
+      .deleteFrom('user')
+      .where('id', '=', id)
+      .returningAll()
+      .executeTakeFirstOrThrow();
 
-      return deletedUser as User;
-    } catch (error: any) {
-      throw new Error(error);
-    }
+    return deletedUser as User;
   }
 }
