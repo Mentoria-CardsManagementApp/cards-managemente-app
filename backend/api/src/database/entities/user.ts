@@ -1,10 +1,10 @@
 import { Generated, Insertable, Selectable, Updateable } from 'kysely';
 
 export interface UserTable {
-  id: string;
-  googleId: string;
-  spotifyId: string;
-  facebookId: string;
+  id: Generated<string>;
+  googleId?: string | null;
+  spotifyId?: string | null;
+  facebookId?: string | null;
   email: string;
   username: string;
   birthDate: Date | null;
